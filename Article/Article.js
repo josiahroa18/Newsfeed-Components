@@ -118,22 +118,22 @@ const data = [
 */
 
 function createArticle(data){
-  data.forEach(article => {
     // Create all necessary elements
     let div = document.createElement('div');
     let h2 = document.createElement('h2');
     let date = document.createElement('p');
-    let articles = document.querySelector('.articles');
     let expandButton = document.createElement('span');
+
+    let articles = document.querySelector('.articles');
 
     div.classList.add('article');
 
-    h2.textContent = article.title; 
-    date.textContent = article.date;
+    h2.textContent = data.title; 
+    date.textContent = data.date;
     div.appendChild(h2);
     div.appendChild(date);
 
-    const pData = [article.firstParagraph, article.secondParagraph, article.thirdParagraph];
+    const pData = [data.firstParagraph, data.secondParagraph, data.thirdParagraph];
     for(let i=0; i<pData.length; i++){
       let p = document.createElement('p');
       p.textContent = pData[i];
@@ -145,10 +145,12 @@ function createArticle(data){
       articles.classList.toggle('.article-open');
     })
     div.appendChild(expandButton);
-    
-    console.log(div);
-    articles.appendChild(div);
-  })
+
+    return div;
 }
 
-createArticle(data);
+let articles = document.querySelector('.articles');
+data.forEach(article => {
+  articles.appendChild(createArticle(article));
+});
+
