@@ -124,15 +124,10 @@ function createArticle(data){
     let date = document.createElement('p');
     let expandButton = document.createElement('span');
 
-    let articles = document.querySelector('.articles');
-
-    div.classList.add('article');
-
-    h2.textContent = data.title; 
-    date.textContent = data.date;
+    // Append all elements to their respective parent
     div.appendChild(h2);
     div.appendChild(date);
-
+    div.appendChild(expandButton);
     const pData = [data.firstParagraph, data.secondParagraph, data.thirdParagraph];
     for(let i=0; i<pData.length; i++){
       let p = document.createElement('p');
@@ -140,17 +135,27 @@ function createArticle(data){
       div.appendChild(p);
     }
 
-    expandButton.classList.add('expandButton');
-    expandButton.addEventListener('click', () => {
-      articles.classList.toggle('.article-open');
-    })
-    div.appendChild(expandButton);
+    // Add text content
+    h2.textContent = data.title; 
+    date.textContent = data.date;
+    expandButton.textContent = "expand"; // Not sure if I am supposed to do this
 
+    // Add classes
+    div.classList.add('article');
+    expandButton.classList.add('expandButton');
+
+    // Add Events
+    expandButton.addEventListener('click', () => {
+      div.classList.toggle('article-open');
+    })
+    
+
+    // console.log(div);
     return div;
 }
 
 let articles = document.querySelector('.articles');
-data.forEach(article => {
+data.map(article => {
   articles.appendChild(createArticle(article));
 });
 
