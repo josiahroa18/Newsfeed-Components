@@ -141,6 +141,12 @@ function createArticle(data){
     let date = document.createElement('p');
     let expandButton = document.createElement('span');
 
+    // STRETCH
+    let close = document.createElement('p');
+    close.textContent = "x";
+    close.classList.add('closeButton');
+    div.appendChild(close);
+
     // Append all elements to their respective parent
     div.appendChild(h2);
     div.appendChild(date);
@@ -165,14 +171,79 @@ function createArticle(data){
     expandButton.addEventListener('click', () => {
       div.classList.toggle('article-open');
     })
+
+    // STRETCH
+    // Would need a unique id to remove this object from data
+    close.addEventListener('click', () => {
+      div.style.display = "none";
+    })
     
 
     // console.log(div);
     return div;
 }
 
-let articles = document.querySelector('.articles');
-data.map(article => {
-  articles.appendChild(createArticle(article));
-});
+function updateArticles(){
+  let articles = document.querySelector('.articles');
+  // Clear all current articles
+  while(articles.firstChild){
+    articles.removeChild(articles.firstChild);
+  }
+  // Add articles
+  data.map(article => {
+    articles.appendChild(createArticle(article));
+  });
+}
+
+function createForm(){
+  // Inputs needed -> title, date, 3p
+  let div = document.createElement('div');
+
+  // Input Fields
+  let titleName = document.createElement('h2');
+  let title = document.createElement('input');
+
+  titleName.textContent = "Title";
+  div.classList.add('write-container');
+  div.appendChild(titleName);
+  div.appendChild(title);
+
+  let contentTitle = document.createElement('h2');
+  contentTitle.textContent = "Content";
+
+  div.appendChild(contentTitle);
+  for(let i=0; i<3; i++){
+    div.appendChild(document.createElement('textarea'));
+  }
+
+  // Submit Button
+  let button = document.createElement('button');
+  button.classList.add('button');
+  button.textContent = "Submit";
+
+  button.addEventListener('click', () => {
+    let article = {
+      title: title.value,
+      date: "Feb 1st, 2020",
+      firstParagraph: div.childNodes[3].value,
+      secondParagraph: div.childNodes[4].value,
+      thirdParagraph: div.childNodes[5].value
+    }
+    data.push(article);
+    updateArticles();
+  });
+
+  div.appendChild(button);
+  return div;
+}
+
+// Initialize Browser
+let writeArea = document.querySelector('.write');
+writeArea.appendChild(createForm());
+updateArticles();
+
+
+
+
+
 

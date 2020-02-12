@@ -73,8 +73,51 @@
   transform: translate(-50%);
   background-color: white;
 }
+.article .closeButton {
+  position: relative;
+  float: right;
+  font-size: 1.3rem;
+}
+.article .closeButton:hover {
+  transform: scale(1.1);
+  color: red;
+  cursor: pointer;
+}
 .article-open {
   height: 400px;
+}
+.write {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.write .write-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+.write .write-container input {
+  width: 50%;
+  height: 30px;
+}
+.write .write-container textarea {
+  height: 60px;
+  width: 80%;
+  margin-bottom: 20px;
+}
+.write .write-container .button {
+  background-color: #388E3C;
+  color: white;
+  padding: 20px 50px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  margin-bottom: 50px;
+}
+.write .write-container .button:hover {
+  cursor: pointer;
+  background-color: #4eb535;
 }
 .menu-button {
   position: absolute;
