@@ -85,6 +85,23 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "My First Vanilla JS Component",
+    date: 'Feb 12th, 2020',
+    firstParagraph: `My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!`,
+    secondParagraph: `My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!`,
+    thirdParagraph: `My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!`
+
   }
 ];
 
