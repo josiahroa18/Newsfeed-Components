@@ -85,6 +85,23 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "My First Vanilla JS Component",
+    date: 'Feb 12th, 2020',
+    firstParagraph: `My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!`,
+    secondParagraph: `My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!`,
+    thirdParagraph: `My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!
+    My first component! My first component! My first component! My first component! My first component! My first component!`
+
   }
 ];
 
@@ -101,14 +118,132 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+  Your function should take either an object as it's one argument, 
+  or 5 separate arguments mapping to each piece of the data object above.
 
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  Step 2: Add an event listener to the expandButton span. 
+  This event listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each oject and add each component to 
+  the DOM as children of the 'articles' div.
 
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
+  Step 5: Add a new article to the array. Make sure it is in the same format as the others. 
+  Refresh the page to see the new article.
 
 */
+
+function createArticle(data){
+    // Create all necessary elements
+    let div = document.createElement('div');
+    let h2 = document.createElement('h2');
+    let date = document.createElement('p');
+    let expandButton = document.createElement('span');
+
+    // STRETCH
+    let close = document.createElement('p');
+    close.textContent = "x";
+    close.classList.add('closeButton');
+    div.appendChild(close);
+
+    // Append all elements to their respective parent
+    div.appendChild(h2);
+    div.appendChild(date);
+    div.appendChild(expandButton);
+    const pData = [data.firstParagraph, data.secondParagraph, data.thirdParagraph];
+    for(let i=0; i<pData.length; i++){
+      let p = document.createElement('p');
+      p.textContent = pData[i];
+      div.appendChild(p);
+    }
+
+    // Add text content
+    h2.textContent = data.title; 
+    date.textContent = data.date;
+    expandButton.textContent = "expand"; // Not sure if I am supposed to do this
+
+    // Add classes
+    div.classList.add('article');
+    expandButton.classList.add('expandButton');
+
+    // Add Events
+    expandButton.addEventListener('click', () => {
+      div.classList.toggle('article-open');
+    })
+
+    // STRETCH
+    // Would need a unique id to remove this object from data
+    close.addEventListener('click', () => {
+      div.style.display = "none";
+    })
+    
+
+    // console.log(div);
+    return div;
+}
+
+function updateArticles(){
+  let articles = document.querySelector('.articles');
+  // Clear all current articles
+  while(articles.firstChild){
+    articles.removeChild(articles.firstChild);
+  }
+  // Add articles
+  data.map(article => {
+    articles.appendChild(createArticle(article));
+  });
+}
+
+function createForm(){
+  // Inputs needed -> title, date, 3p
+  let div = document.createElement('div');
+
+  // Input Fields
+  let titleName = document.createElement('h2');
+  let title = document.createElement('input');
+
+  titleName.textContent = "Title";
+  div.classList.add('write-container');
+  div.appendChild(titleName);
+  div.appendChild(title);
+
+  let contentTitle = document.createElement('h2');
+  contentTitle.textContent = "Content";
+
+  div.appendChild(contentTitle);
+  for(let i=0; i<3; i++){
+    div.appendChild(document.createElement('textarea'));
+  }
+
+  // Submit Button
+  let button = document.createElement('button');
+  button.classList.add('button');
+  button.textContent = "Submit";
+
+  button.addEventListener('click', () => {
+    let article = {
+      title: title.value,
+      date: "Feb 1st, 2020",
+      firstParagraph: div.childNodes[3].value,
+      secondParagraph: div.childNodes[4].value,
+      thirdParagraph: div.childNodes[5].value
+    }
+    data.push(article);
+    updateArticles();
+  });
+
+  div.appendChild(button);
+  return div;
+}
+
+// Initialize Browser
+let writeArea = document.querySelector('.write');
+writeArea.appendChild(createForm());
+updateArticles();
+
+
+
+
+
+
